@@ -5,3 +5,8 @@ layout: layout.html
 <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
 <p>{{ post.content }}</p>
 {% endfor %}
+---------------
+{% for post in collections.rust %}
+<h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+<p>{{ post.content }}</p>
+{% endfor %}
