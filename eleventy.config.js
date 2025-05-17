@@ -1,7 +1,9 @@
-import graphVizPlugin from "eleventy-plugin-graphviz";
+import graphVizPlugin from "../eleventy-plugin-graphviz/dist/index.js";
 
 export default async function(eleventyConfig) {
-  eleventyConfig.addPlugin(graphVizPlugin, { format: "png" });
+  eleventyConfig.addPlugin(graphVizPlugin, { format: "svg" });
+  // Copy bundle.css to output directory
+  eleventyConfig.addPassthroughCopy({"src/_includes/bundle.css": "bundle.css"});
 };
 
 export const config = {

@@ -1,0 +1,14 @@
+body {
+    background-color: #1a1438;
+    color: #dfdfdf;
+    font-family: "Times New Roman", Times, serif;
+}
+
+div.page-contents
+{
+    background-color: #2c2070;
+    margin: auto;
+    padding: 2em;
+    width: 70%;
+}
+

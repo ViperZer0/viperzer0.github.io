@@ -1,0 +1,10 @@
+digraph example {
+    node1 [label="A"]
+    node2 [label="B"]
+    node3 [label="C"]
+    node4 [label="D"]
+    node1->node2
+    node2->node1
+    node3->node2
+    node3->node1
+}
