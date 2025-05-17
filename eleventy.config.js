@@ -1,7 +1,6 @@
-import graphVizPlugin from "../eleventy-plugin-graphviz/dist/index.js";
+import graphVizPlugin from "eleventy-plugin-graphviz";
 
 export default async function(eleventyConfig) {
-  console.log(JSON.stringify(graphVizPlugin));
   eleventyConfig.addPlugin(graphVizPlugin, { format: "png" });
 };
 
