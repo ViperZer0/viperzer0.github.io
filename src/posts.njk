@@ -26,18 +26,18 @@ permalink: "posts/{{ pagination.items[0].data.id }}/index.html"
             <div class="content-footer-previous-item">
                 {% if pagination.href.previous %}
                 <a href="{{ pagination.href.previous }}">Previous Article</a> 
-                <a href="{{ pagination.href.previous }}">{{ pagination.page.previous.title }}</a>
+                <a href="{{ pagination.href.previous }}">{{ pagination.page.previous.data.title }}</a>
                 {% else %}
                 <a href="">You are here!</a>
                 {% endif %}
             </div>
             <div class="content-footer-home-item">
-                <a href="/index.html">Home</a> 
+                <a href="/">Home</a> 
             </div>
             <div class="content-footer-next-item">
                 {% if pagination.href.next %}
                 <a href="{{ pagination.href.next }}">Next Article</a> 
-                <a href="{{ pagination.href.next }}">{{ pagination.page.next.title }}</a>
+                <a href="{{ pagination.href.next }}">{{ pagination.page.next.data.title }}</a>
                 {% else %}
                 <a href="">No new articles!</a>
                 {% endif %}

@@ -9,9 +9,7 @@ Here's my home page :3
 
 Here are my posts
 
-<ul>
 {% for post in collections.post %}
-<li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+<a href="posts/{{ post.data.id }}/">{{ post.data.title }}</a>
 {% endfor %}
-</ul>
 
