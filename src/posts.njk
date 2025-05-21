@@ -19,6 +19,7 @@ permalink: "posts/{{ pagination.items[0].data.id }}/index.html"
             {{ pagination.items[0].content | safe }}
         </main>
         </div>
+        <nav aria-label="pagination-menu">
         <div class="content-footer">
             <div class="content-footer-previous-item">
                 {% if pagination.href.previous %}
@@ -40,6 +41,7 @@ permalink: "posts/{{ pagination.items[0].data.id }}/index.html"
                 {% endif %}
             </div>
         </div>
+        </nav>
         </div>
         </div>
     </body>
