@@ -49,16 +49,29 @@ a
     text-decoration: none;
 }
 
+a.content-footer
+{
+    font-size: 16px;
+}
+
+a.inline-link
+{
+    font-size: 16px;
+}
+
 div.content-wrapper-outer
 {
     display: block;
-    width: 70%;
+    width: 60%;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
     background-color: #1F1D45;
-    padding: 0px 20px 20px;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 1px;
 }
 
 div.content-wrapper-inner
@@ -66,8 +79,8 @@ div.content-wrapper-inner
     display: block;
     min-width: 500px;
     background-color: #282E55;
-    padding: 0 15px;
-    margin-bottom: 15px;
+    padding: 1px 15px;
+    margin-bottom: 20px;
 }
 
 div.content-footer
@@ -77,6 +90,7 @@ div.content-footer
     justify-content: space-between;
     background-color: #282E55;
     padding: 15px;
+    margin-bottom: 20px;
 }
 
 div.content-footer-previous-item
