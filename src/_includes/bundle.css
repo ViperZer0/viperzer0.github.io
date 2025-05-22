@@ -41,21 +41,20 @@ div.navbar-item
     margin: auto 1em;
 }
 
+/* Default to inline link*/
 a
 {
     color: #FFFFFF;
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-a.content-footer
-{
+    font-family: "Newsreader", serif;
     font-size: 16px;
+    text-decoration: none;
+    font-style: italic;
 }
 
-a.inline-link
+a.content-footer, a.list-link, a.navbar-item
 {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
     font-size: 16px;
 }
 
