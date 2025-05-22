@@ -1,9 +1,13 @@
 import graphVizPlugin from "../eleventy-plugin-graphviz/dist/index.js";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import markdownItCallouts from "markdown-it-callouts";
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(graphVizPlugin, { format: "svg" });
   eleventyConfig.addPlugin(syntaxHighlight);
+  // Add callout parsing
+  eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(markdownItCallouts));
+
   // Copy bundle.css to output directory
   eleventyConfig.addPassthroughCopy({"src/_includes/bundle.css": "bundle.css"});
   // Add sorted posts collection
