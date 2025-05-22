@@ -44,15 +44,27 @@ div.navbar-item
 /* Default to inline link*/
 a
 {
-    color: #FFFFFF;
+    color: #8192FF;
     font-family: "Newsreader", serif;
-    font-size: 16px;
+    font-size: 18px;
     text-decoration: none;
+}
+
+code
+{
+    background-color: #2d2d2d;
+    font-family: "Fragment Mono", monospace;
+    font-size: 16px;
+}
+
+blockquote
+{
     font-style: italic;
 }
 
 a.content-footer, a.list-link, a.navbar-item
 {
+    color: #FFFFFF;
     font-family: "Inter", sans-serif;
     font-style: normal;
     font-size: 16px;

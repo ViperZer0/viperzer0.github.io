@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
     "eleventy-plugin-graphviz": "^1.0.0"
   }
 }
