@@ -64,6 +64,7 @@ pre
 {
     background-color: #2d2d2d;
     overflow: scroll;
+    border-radius: 4px;
 }
 
 code
@@ -138,7 +139,7 @@ div.content-footer-next-item
 /******Call outs********/
 div.callout-symbol
 {
-    margin-right: 1em;
+    margin-right: 0.7em;
 }
 
 div.callout-title
@@ -153,9 +154,11 @@ div.callout
     width: 75%;
     margin: auto;
     padding: 20px;
+    font-size: 17px;
+    border-radius: 4px;
 }
 
-div.callout-info
+div.callout-info, div.callout-note
 {
-    background-color: #00499C;
+    background-color: #366293;
 }
