@@ -23,7 +23,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Eleventy Action
+      - name: Build
       # You may pin to the exact commit or the version.
       # uses: TartanLlama/actions-eleventy@6c28b3072246fb361c537282e3eac5ab9b6ac85e
       - uses: TartanLlama/actions-eleventy@v1.2
@@ -31,7 +31,14 @@ jobs:
           # If set to `true`, `npm install` will be run before Eleventy is invoked
           install_dependencies: true
 
-      # Publish site
-      - uses: actions/upload-pages-artifact
+      # Make artifact
+      - name: Upload Artifacts
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
+
+      - name: Deploy site
+      - uses: actions/deploy-pages@v4
+        
+
+      
