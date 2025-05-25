@@ -29,6 +29,8 @@ jobs:
         uses: ts-graphviz/setup-graphviz@v2
         with:
           ubuntu-skip-apt-update: true
+      - name: Test Graphviz???
+        run: dot -V
         
       - name: Build static files
       # You may pin to the exact commit or the version.
