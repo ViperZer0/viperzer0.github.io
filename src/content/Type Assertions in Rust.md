@@ -36,7 +36,7 @@ pub struct Fraction
 
 Right off the bat, before we even begin to work on implementing methods that can operate on our new fractions, Rust's type system is working to ensure that we can be confident that our type is always in a *valid* state. By default, struct members are private and can only be modified by code within the same module; what we might call "internal" or "authorized" functions. Instead of exposing the internal state or data to be modified by anyone, it's best practice to control access via getters and setters or other methods where you can do validation, etc.
 
-> [!note]
+> [!note] Note
 > As mentioned, Rust does not use object oriented principles. This struct is *not* a class or an object. It's just a struct. But we can still leverage visibility modifiers, member methods, and associated functions just as we can in most object oriented languages.
 
 ```rust
@@ -95,7 +95,7 @@ In Rust, you have no such restrictions. A "constructor" is just any function tha
 
 With all this in mind, let's figure out how we want to create Fractions.
 
-> [!info]
+> [!info] Info
 > Convention dictates that, all else being equal, we call our constructor method `new()`. You should actually use a better name whenever your specific circumstances dictate, though.
 
 ### Option 1: Return a `Fraction`
