@@ -26,7 +26,9 @@ jobs:
       - name: Setup Graphviz
         # You may pin to the exact commit or the version.
         # uses: ts-graphviz/setup-graphviz@c001ccfb5aff62e28bda6a6c39b59a7e061be5b9
-        uses: ts-graphviz/setup-graphviz@v1
+        uses: ts-graphviz/setup-graphviz@v2
+        with:
+          ubuntu-skip-apt-update: true
         
       - name: Build static files
       # You may pin to the exact commit or the version.
