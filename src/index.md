@@ -23,11 +23,11 @@ of their fellow characters.
 for [MiniJam #179](https://itch.io/jam/mini-jam-179-energy). It features dynamic, real-time audio processing/generation
 for harmonics. The source code can be found on [GitHub](https://github.com/ViperZer0/minijam-179).
 
-I've also contributed to a number of other game jams along with my friends [Max]() and [Izzy King](http://izzyking.com/).
+I've also contributed to a number of other game jams along with my friends [Max Williams](https://bsky.app/profile/wrenchykenku.bsky.social) and [Izzy King](http://izzyking.com/).
 We've made some games, including [Snap To](https://wrenchykenku.itch.io/snap-to), [Desktop Defender](https://wrenchykenku.itch.io/desktop-defender),
 and [The Cursed Blade](https://wrenchykenku.itch.io/the-cursed-blade).
 
-This blog! It's built with [11ty](https://www.11ty.dev/docs/), and I keep all the source code public on [GitHub]().
+This blog! It's built with [11ty](https://www.11ty.dev/docs/), and I keep all the source code public on [GitHub](https://github.com/ViperZer0/viperzer0.github.io).
 I've even developed a plugin for this blog, [eleventy-plugin-graphviz](https://www.npmjs.com/package/eleventy-plugin-graphviz)
 which allows me to generate [GraphViz](https://graphviz.org/) graphs from DOT scripts.
 
