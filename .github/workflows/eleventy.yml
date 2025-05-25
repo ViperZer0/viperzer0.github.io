@@ -26,16 +26,11 @@ jobs:
       - name: Setup Graphviz
         run: sudo apt-get install -y graphviz
         
-      - name: Test Graphviz???
-        run: dot -V
+      - name: Install dependencies
+        run: npm install
         
       - name: Build static files
-      # You may pin to the exact commit or the version.
-      # uses: TartanLlama/actions-eleventy@6c28b3072246fb361c537282e3eac5ab9b6ac85e
-        uses: patrickweaver/actions-eleventy@master
-        with:
-          # If set to `true`, `npm install` will be run before Eleventy is invoked
-          install_dependencies: true
+        run: npx eleventy
           
       # Make artifact
       - name: Upload static files as artifact
