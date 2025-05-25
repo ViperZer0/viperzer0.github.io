@@ -103,10 +103,25 @@ div.content-wrapper-outer
     padding-bottom: 1px;
 }
 
+@media screen and (orientation:portrait)
+{
+    div.content-wrapper-inner
+    {
+        min-width: 100%;
+    }
+}
+
+@media screen and (orientation:landscape)
+{
+    div.content-wrapper-inner
+    {
+        min-width: 500px;
+    }
+}
+
 div.content-wrapper-inner
 {
     display: block;
-    min-width: 500px;
     background-color: #282E55;
     padding: 1px 15px;
     margin-bottom: 20px;
