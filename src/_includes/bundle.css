@@ -19,7 +19,7 @@ p {
 /*We don't add a margin to a paragraph unless it follows another paragraph*/
 p + p
 {
-    margin-top:2.5em;
+    margin-top: 1.5em;
 }
 
 h1,h2,h3,h4,h5
