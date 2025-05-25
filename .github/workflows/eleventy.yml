@@ -24,9 +24,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Graphviz
-        # You may pin to the exact commit or the version.
-        # uses: ts-graphviz/setup-graphviz@c001ccfb5aff62e28bda6a6c39b59a7e061be5b9
-        run: apt-get install -y graphviz
+        run: sudo apt-get install -y graphviz
+        
       - name: Test Graphviz???
         run: dot -V
         
