@@ -20,7 +20,7 @@ DESCRIPTION
 
 The problem with this is that *any* function that operates on a string or character array more or less has to pinky-promise-cross-my-heart-and-hope-to-die I won't forget to include the \0.
 
-This is one of the major issues with C that object oriented languages fixes. Object oriented languages encourage *encapsulation*, where modifications to internal state is gated behind specific operations. The developer(s) responsible for that specific class can ensure that their class's invariants are maintained at all times. If you look at the [API for C++ strings](https://en.cppreference.com/w/cpp/string/basic_string), there are many operations we can perform on strings. But not only do we not know what the contents of the string are, the exact structure and implementation can actually vary between different compilers and libraries. We are freed from the burden of promising to maintain the invariants of a string because all of the methods that operate on strings and the people who wrote those operations ensure it for us.
+This is one of the major issues with C that object oriented languages fix. Object oriented languages encourage *encapsulation*, where modifications to internal state are gated behind specific operations. The developer(s) responsible for that specific class can ensure that their class's invariants are maintained at all times. If you look at the [API for C++ strings](https://en.cppreference.com/w/cpp/string/basic_string), there are many operations we can perform on strings. But not only do we not know what the contents of the string are, the exact structure and implementation can actually vary between different compilers and libraries. We are freed from the burden of promising to maintain the invariants of a string because all of the methods that operate on strings and the people who wrote those operations ensure it for us.
 
 However, you don't need object oriented programming to have encapsulation, as demonstrated by Rust, and in this article I want to take a deep dive into how Rust allows us to encapsulate our data, make strong assertions about the invariants of our programs, and how we can build our types and functions around our invariants.
 
@@ -34,7 +34,7 @@ pub struct Fraction
 }
 ```
 
-Right off the bat, before we even begin to work on implementing methods that can operate on our new fractions, Rust's type system is working to ensure that we can be confident that our type is always in a *valid* state. By default, struct members are private and can only be modified by code within the same module; what we might call "internal" or "authorized" functions. Instead of exposing the internal state or data to be modified by anyone, it's best practice to control access via getters and setters or other methods where you can do validation, etc.
+Right off the bat, before we even begin to work on implementing methods that can operate on our new fractions, Rust's type system is working to ensure that we can be confident that our type is always in a *valid* state. By default, struct members are private and can only be modified by code within the same module, what we might call "internal" or "authorized" functions. Instead of exposing the internal state or data to be modified by anyone, it's best practice to control access via getters and setters or other methods where you can do validation, etc.
 
 > [!note] Note
 > As mentioned, Rust does not use object oriented principles. This struct is *not* a class or an object. It's just a struct. But we can still leverage visibility modifiers, member methods, and associated functions just as we can in most object oriented languages.
@@ -89,14 +89,16 @@ class AClass
 }
 ```
 
-Importantly, this constructor *mandates* that this function has a signature that returns an `AClass`. If you want the constructor to fail, you *must* throw an exception. There's a lot more wackiness with constructors in general, if you want to learn more about that I highly recommend [this video](https://www.youtube.com/watch?v=KWB-gDVuy_I) by YouTuber Logan Smith.
+Importantly, this constructor *mandates* that this function has a signature that returns an `AClass`. If you want the constructor to fail, you *must* throw an exception. There's a lot more wackiness with constructors in general. If you want to learn more, I highly recommend [this video](https://www.youtube.com/watch?v=KWB-gDVuy_I) by YouTuber Logan Smith.
 
 In Rust, you have no such restrictions. A "constructor" is just any function that returns an object of the desired type. This can be via an associated function of that type, or even a function of a completely different type! And in fact, you don't even have to return the type itself as in an object oriented language. You can return `T`, `Option<T>`, `Result<T>`, `Vec<T>` or anything you want.
 
 With all this in mind, let's figure out how we want to create Fractions.
 
 > [!info] Info
-> Convention dictates that, all else being equal, we call our constructor method `new()`. You should actually use a better name whenever your specific circumstances dictate, though.
+> Convention dictates that, all else being equal, we call our constructor method `new()`. You should actually use a better name if one applies, however.
+> While `new()` is more or less standard practice and users often expect it, I think that if a different method name is more descriptive than `new()`
+> you should use it. The gain from being clear about what your function does is greater than the cost of having to (*gasp*) read documentation.
 
 ### Option 1: Return a `Fraction`
 
@@ -111,7 +113,7 @@ pub fn new(numerator: i64, denominator: i64) -> Self
 }
 ```
 
-The problem with this is that this method *can't* fail if our invariants are violated. What invariants? Well, we have just one. Our denominator can't equal 0. But it can't fail, It's forced to return a `Fraction`, whether or not that makes sense or not. Here, having a denominator of 0 is totally fine, but when we try to call, say, `as_float()` which requires dividing by the denominator, we'll likely panic. So instead, let's update this function to use an *assertion*. If the assertion fails, the function should panic and the program should halt. Thus instead of panicking unexpectedly when we *use* our Fraction, we panic when we *create* an invalid one.
+The problem with this is that this method *can't* fail if our invariants are violated. What invariants? Well, we have just one. Our denominator can't equal 0. But it can't fail, It's forced to return a `Fraction`, whether or not that makes sense or not. Here, having a denominator of 0 is totally fine, but when we try to call, say, `as_float()` which requires dividing by the denominator, it will panic. So instead, let's update this function to use an *assertion*. If the assertion fails, the function should panic and the program should halt. Thus instead of panicking unexpectedly when we *use* our Fraction, we panic when we *create* an invalid one.
 
 ```rust
 pub fn new(numerator: i64, denominator: i64) -> Self
@@ -148,7 +150,7 @@ pub fn new(numerator: i64, denominator: i64) -> Option<Self>
         })
     }
 }
-```        
+```
 
 **Pros:**
 Errors-as-values comes in clutch yet again. We never receive a `Fraction` object unless the operation was successful. If the numerator is a 0, we don't get a fraction, just a `None.`
@@ -158,7 +160,7 @@ The type system enforces this check. While you are *allowed* to pass in a 0 as a
 The type system clearly *describes* the problem. Even if someone came across this function signature and didn't know *how* this function could fail, they know that it can. Supplementing this with documentation to describe the failure case helps a lot.
 
 **Cons:**
-Nobody *likes* handling `Options`. What if I pretty-please-pretty-promise that my denominator isn't 0? I still have to go through all this work (calling `fraction.unwrap()`, god forbid) to get at the underlying value.
+Nobody *likes* handling `Options`. What if I pretty-please-pretty-promise that my denominator isn't 0? I still have to go through all this work (calling `fraction.unwrap()`, God forbid) to get at the underlying value.
 
 Furthermore, this check happens only at runtime. What if I *know* the values I'm passing into the fraction at compile time, and want to have the check occur then? Maybe the runtime case where I'm passing 0 as a denominator happens in a very specific branch of code, and so I won't encounter the `None` when testing/running my system normally.
 
@@ -169,7 +171,7 @@ if(functionThatReturnsTrueOneInAMillionTimes())
 }
 ```
 
-Do you trust this code? Would you use it in your own code base? Granted, this is a terrible way of designing code if you're going to test it, but still, wouldn't it be nice if the compiler just… peeked inside that function and tested it before we even get to executing it?
+Do you trust this code? Would you use it in your own code base? Granted, this is a terrible way of designing code if you're going to test it, but still, wouldn't it be nice if the compiler just peeked inside that function and tested it before we even got to executing it?
 
 ### Option 3: Use `NonZero`
 
@@ -219,9 +221,9 @@ So what do I recommend? While I don't think there's really a one-size-fits all s
 
 ### 1: Enforce Invariance in Your Most Basic Types, but no Further.
 
-Every type in Rust that isn't a primitive is a composite type, made up of one or more primitive types or other composite types. And just as composite types are made up of one or more other types, the invariance of a composite type is the sum of the invariance of its member types.
+Every type in Rust that isn't a primitive is a composite type made up of one or more primitive types or other composite types. And just as composite types are made up of one or more other types, the invariance of a composite type is the sum of the invariance of its member types.
 
-A valid database should be made of valid tables, valid tables should be made up of valid entries. Valid entries should be made up of valid usernames, emails, passwords, etc. But past that? It doesn't really make sense to break things up any further. Could you have a `Password` that is constructed out of arguments like `UppercaseSymbol`, `SpecialCharacter`, etc? Sure, but… why?
+A valid database should be made of valid tables and valid tables should be made up of valid entries. Valid entries should be made up of valid usernames, emails, passwords, etc. But past that? It doesn't really make sense to break things up any further. Could you have a `Password` that is constructed out of arguments like `UppercaseSymbol`, `SpecialCharacter`, etc? Sure, but why? Those types don't serve any purpose outside of `Password`, so why bother creating them?
 
 The important thing to remember is that when you want your system to be "type-safe", `Option` and `Result` *already* make your system type safe! As cool as things like the typestate pattern are and having validated wrapper types passed into functions, at the end of the day, `Option` and `Result` are *types* and must be handled by and with the type system.
 
@@ -229,7 +231,7 @@ I'd argue a good rule of thumb is that if you have types that are exclusively us
 
 ### 2: Use `const` for Compile-time Invariance Checks
 
-This keywords is actually quite new to me. Remember how I said that it would be really cool if we could ask the compiler to check if our invariants are maintained at compile time? In other words, if we have some static literal like a number, why can't we also have the entire object be a sort of static literal computed at compile time? It turns out we can!
+This keyword is actually quite new to me. Remember how I said that it would be really cool if we could ask the compiler to check if our invariants are maintained at compile time? In other words, if we have some static literal like a number, why can't we also have the entire object be a sort of static literal computed at compile time? It turns out we can!
 
 Rust allows you to specify entire functions as `const` which allows them to run at both [compile time and runtime](https://doc.rust-lang.org/reference/const_eval.html). There's a few restrictions on what you can do inside a `const` function: for one, every function called within a `const` function must also be `const`. Fortunately, `Option` does implement `const` on many of its functions, and it's good practice to do the same on your own data types. Constructor/`new()` type functions are especially great candidates to add `const` onto, there's essentially no reason not to add it everywhere you can unless doing so conflicts with the aforementioned restrictions. As an example, while `Option` *does* have `const unwrap()` and `const expect()`, `Result` does not for some reason. I expect it might have something to do with the fact that `Result`'s `Err` type is generic while `Option`'s `None` is not, or maybe just no one has gotten around to making it `const` yet.
 

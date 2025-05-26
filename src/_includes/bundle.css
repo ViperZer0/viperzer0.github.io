@@ -33,7 +33,7 @@ h1
     font-size: 62px;
     text-transform: uppercase;
     text-align: center;
-    padding: 40px 0;
+    padding: 1em 0;
 }
 
 div.navbar
@@ -43,7 +43,7 @@ div.navbar
     flex-wrap: nowrap;
     justify-content: flex-start;
     background-color: #282E55;
-    height: 50px;
+    height: 3em;
 }
 
 div.navbar-item
@@ -91,35 +91,46 @@ a.content-footer, a.list-link, a.navbar-item
 div.content-wrapper-outer
 {
     display: block;
-    width: 50%;
-    margin-top: 10px;
+    width: 100%;
+    max-width: 100vh;
+    margin-top: 0.6em;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
     background-color: #1F1D45;
     padding-top: 0px;
-    padding-right: 20px;
-    padding-left: 20px;
     padding-bottom: 1px;
 }
 
 div.content-wrapper-inner
 {
     display: block;
-    min-width: 500px;
+    width: calc(100% - 2.5em);
     background-color: #282E55;
-    padding: 1px 15px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1px 0px;
     margin-bottom: 20px;
+}
+
+div.content-main
+{
+    width: calc(100% - 2.5em);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.content-footer
 {
     display:flex;
+    width: calc(100% - 2.5em - 2em);
     flex-direction: row;
     justify-content: space-between;
     background-color: #282E55;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.content-footer-previous-item

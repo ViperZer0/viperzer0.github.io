@@ -16,10 +16,12 @@ permalink: "posts/{{ pagination.items[0].data.id }}/index.html"
         {% include "navbar.njk" %}
         <div class="content-wrapper-outer">
         <div class="content-wrapper-inner">
+        <div class="content-main">
         <main>
             <h1>{{ pagination.items[0].data.title }}</h1>
             {{ pagination.items[0].content | safe }}
         </main>
+        </div>
         </div>
         <nav aria-label="pagination-menu">
         <div class="content-footer">
